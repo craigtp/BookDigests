@@ -1,6 +1,6 @@
 # Book Digest: Domain-Driven Design Distilled
 
-Title     : Domain-Driven Design Distilled
+Title     : Domain-Driven Design Distilled  
 Author(s) : Vaughn Vernon  
 ISBN-10   : 0134434420  
 ISBN-13   : 978-0134434421
