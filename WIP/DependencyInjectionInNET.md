@@ -1,6 +1,6 @@
 # Book Digest: Dependency Injection In .NET
 
-Title     : Dependency Injection In .NET
+Title     : Dependency Injection In .NET  
 Author(s) : Mark Seemann  
 ISBN-10   : 1935182501  
 ISBN-13   : 978-1935182504
