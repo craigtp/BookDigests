@@ -12,3 +12,4 @@ Improvements via suggestions and/or pull requests are welcome, especially in the
 [Software Estimation](BookDigests/SoftwareEstimation.md)  
 [The Nature Of Software Development](BookDigests/TheNatureOfSoftwareDevelopment.md)  
 [Software Requirements, 3rd Edition](BookDigests/SoftwareRequirements.md)
+[Domain-Driven Design: Tackling Complexity In The Heart Of Software](BookDigests/DomainDrivenDesign.md)
