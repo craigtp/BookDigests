@@ -26,4 +26,4 @@ ISBN-13   : 978-1935182504
 - In order to be truly effective, DI must be pervasive throughout your codebase.
 
 ## Chapter 2 - A Comprehensive Example
-*
+- 
