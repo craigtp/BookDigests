@@ -26,3 +26,13 @@ ISBN-13   : 978-0596802295
 - Depending on the context of your project or language, there may be other formatting conventions you can use to make names contain more information. Following conventions for languages, platforms or frameworks can help give meaning to names.  For example, in the jQuery library, whose function name is a `$`, you could prefix jQuery result variables with a `$` symbol too to make it clear that the variable is a jQuery result.
 
 ## Chapter 3 - Names That Can't Be Misconstrued
+- Actively scrutinize your names and ask yourself, "What other meanings could someone interpret from this name?"
+- Don't use words like `filter` since they're ambiguous.  For example, code such as `myObjects.Filter(year > 2010)` isn't clear as to whether the method result includes objects with year greater than 2010 or excludes them.  Include or Exclude would be a better name here.
+- The clearest way to name limits of values is to prefix them with either `min_` or `max_`.
+- When dealing with names that represent inclusive ranges, prefer to use words such as `first` and `last` as these names imply inclusion.
+- When dealing with names that represent either inclusive or exclusive ranges, prefer to use words such as `begin` and `end`.
+- When naming booleans, adding words such as `is`, `has`, `can` or `should` to the beginning of the name can make the name much clearer.  For example, a function named `SpaceLeft()` sounds like it might return a number, whereas `HasSpaceLeft()` sounds much more like a true/false value.
+- Avoid using negated terms in boolean values as these cause confusion.  For example, don't use `disable_ssl` but use something like `use_ssl`.
+- Always attempt to match your names to the expectations of users.  For example, many programmers understand a function prefixed with `get` to refer to a simple, non-compute intensive property accessor or similar, so make sure that you don't have a function prefixed with `get` that performs intensive computation.
+
+## Chapter 4 - Aesthetics
