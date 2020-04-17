@@ -36,3 +36,13 @@ ISBN-13   : 978-0596802295
 - Always attempt to match your names to the expectations of users.  For example, many programmers understand a function prefixed with `get` to refer to a simple, non-compute intensive property accessor or similar, so make sure that you don't have a function prefixed with `get` that performs intensive computation.
 
 ## Chapter 4 - Aesthetics
+- A lot of thought goes into the layout of things like magazine articles.  Good source code should be just as "easy on the eyes".  Use a consistent layout and make similar code look similar.
+- Rearrange line breaks for similar/repeated code so that each has the same layout.  Use column/horizontal alignment to help achieve this.
+- When code is repeated but can wrap differently for each invocation (such as in unit tests), wrap the code in methods to clean up the irregular layout.
+- Pick a meaningful order to code.  If you have to declare five different variables and then use them in checks, ensure the checks are in the same order as the declaration.
+- When defining a large list of methods (e.g. inside an interface), break those methods into logical groups and perhaps add a single-line comment above each group to help clarify.
+- Break method code into "paragraphs".  If you're reading some data, processing, then writing it out, group the lines for each of those sections into their own "paragraph" perhaps with a single-line comment to help clarify the intent.
+- Consistent style is more important than the "right" style.  e.g. Method braces can be either K&R style or Allman style.  Neither is "right" or "wrong", but make sure to follow the same convention used throughout the entire codebase.
+
+# Chapter 5 - Knowing What To Comment
+- 
