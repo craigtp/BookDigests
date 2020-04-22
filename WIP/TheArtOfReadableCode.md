@@ -44,5 +44,26 @@ ISBN-13   : 978-0596802295
 - Break method code into "paragraphs".  If you're reading some data, processing, then writing it out, group the lines for each of those sections into their own "paragraph" perhaps with a single-line comment to help clarify the intent.
 - Consistent style is more important than the "right" style.  e.g. Method braces can be either K&R style or Allman style.  Neither is "right" or "wrong", but make sure to follow the same convention used throughout the entire codebase.
 
-# Chapter 5 - Knowing What To Comment
-- 
+## Chapter 5 - Knowing What To Comment
+- The purpose of commenting is to help the reader know as much as the writer did.
+- Don't comment on facts that can be derived quickly from the code itself.  Quickly is important here, it's ok to add a comment that may not present any new information but is easier and quicker to read and understand than the code it is commenting.
+- Comments shouldn't make up for bad names.  If a variable or function's name isn't clear such that you feel it needs a comment, fix the name instead.  A good name is better than a good comment.
+- A lot of good comments can come out of recording the important thoughts you had whilst writing the code.
+- Use comments that teach the reader something about the code.  A comment stating, for example, that you're using a binary tree instead of a hash table as tests showed the binary tree to be 40% faster give great insight and prevent would-be code optimizers from wasting their time.
+- Use comments that help explain issues with the code, too.  A comment indicating that a class is getting too large along with some ideas of how to improve it, can help readers to get started on refactoring.  This extends to specific flaws or work-arounds that are present in the code such as using a better algorithm, dealing with more use cases etc.  These will most often take the for of `TODO:` style comments.
+- Add comments to your constants.  Even with a good name, e.g. `NUM_THREADS`, it's helpful to add a comment to indicate the general use of the constant and what realistic values might be assigned to it - e.g. `// Threads should be multiple of the available core in the machine`.
+- If your chosen language has specific "hacks" to perform some function that are non-intuitive to the reader, make sure to comment these.  If an API has a `.Clear()` method but you use another mechanism to empty the object (perhaps to ensure that memory is reclaimed where it might not otherwise be), ensure this is explicitly called out in a comment.
+- Comment likely pitfalls in the code. If code could be seen as surprising or could be misused, call it out. For example, if you have a method that sends an email and that method makes calls to external libraries that can take some time to complete, ensure the comment on the method indicates this fact.
+- Include high-level, "big picture" comments that document the general execution flow of the code.  These comments are the same as verbal comments you might make if you were giving a new team member a tour of the code base. e.g "This is the glue code between the business logic and the database and none of the application code should call this directly."
+- Use Summary comments to describe chunks of code in longer functions.  e.g. If you're performing a few nested loops, you could comment above to say "Find all items that customers purchases for themselves". Such comments also act as a bullet point summary list of what the function does.
+- Some prevailing wisdom says to only comment the "why" of the code, not the "what" or the "how", but this can be too simplistic and open to interpretation.  It is better to simply comment when it will help a reader to understand the code more easily.
+
+## Chapter 6 - Making Comment Precise And Compact
+- Comments should have a high information-to-space ratio.
+- Avoid ambiguous pronouns such as "it", "this" etc.  Be explicit with what you're referring to, especially when a pronoun could be interpreted to mean different things.
+- Keep sentences short and too the point.  Instead of saying "Depending on whether we've already crawled this URL before, give it a different priority", instead say "Give higher priority to URLs we've never crawled before".
+- Always describe function behaviour precisely.  If you comment a function that counts the number of lines in a file, the definition of a "line" isn't completely clear (does an empty line count?).  Better to describe the function to say that you count the number of newline bytes in a file.  Use example input/output values to help.
+- Always state your intent in comments.  Instead of using a comment that simply describes the code e.g. "Iterate through the list in reverse-order", use a comment that describes the intent behind the iteration e.g. "Display each price, from highest to lowest".  A positive side-effect of such comments are that they can potentially highlight bugs in the code, effectively acting as a redundancy check.
+- If your language doesn't allow named arguments for method parameters, use comments in front of calls to the method to help clarify what the values represent. e.g. Instead of code such as `Connect(10, false)`, write this `Connect( /* timeout_ms */ 10, /* use_encryption */ false)`
+- Keep comments brief by using words that pack a lot of meaning and will be well understood by readers.  e.g. You can simply use the phrase "caching layer" rather than having to describe exactly what one is.
+
