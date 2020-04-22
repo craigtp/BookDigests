@@ -58,7 +58,7 @@ ISBN-13   : 978-0596802295
 - Use Summary comments to describe chunks of code in longer functions.  e.g. If you're performing a few nested loops, you could comment above to say "Find all items that customers purchases for themselves". Such comments also act as a bullet point summary list of what the function does.
 - Some prevailing wisdom says to only comment the "why" of the code, not the "what" or the "how", but this can be too simplistic and open to interpretation.  It is better to simply comment when it will help a reader to understand the code more easily.
 
-## Chapter 6 - Making Comment Precise And Compact
+## Chapter 6 - Making Comments Precise And Compact
 - Comments should have a high information-to-space ratio.
 - Avoid ambiguous pronouns such as "it", "this" etc.  Be explicit with what you're referring to, especially when a pronoun could be interpreted to mean different things.
 - Keep sentences short and too the point.  Instead of saying "Depending on whether we've already crawled this URL before, give it a different priority", instead say "Give higher priority to URLs we've never crawled before".
