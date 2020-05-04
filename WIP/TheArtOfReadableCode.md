@@ -67,3 +67,15 @@ ISBN-13   : 978-0596802295
 - If your language doesn't allow named arguments for method parameters, use comments in front of calls to the method to help clarify what the values represent. e.g. Instead of code such as `Connect(10, false)`, write this `Connect( /* timeout_ms */ 10, /* use_encryption */ false)`
 - Keep comments brief by using words that pack a lot of meaning and will be well understood by readers.  e.g. You can simply use the phrase "caching layer" rather than having to describe exactly what one is.
 
+## Chapter 7 - Making Control Flow Easy To Read
+- Make all conditionals, loops and other changes to control flow as natural as possible.  They should be written in a way that doesn't cause the reader to stop and have to re-read the code.
+- When comparing values in a conditional, ensure the left-hand side is the expression being "interrogated" and the right-hand side is the expression being compared against, which should be more consistent. i.e. `if (length > 10)` rather than `if (10 < length)` or `if (bytes_received < bytes_expected)` rather than `if (bytes_expected > bytes_received)`
+- When writing if/else statements, prefer to deal with either the positive use case inside the first if.  Alternatively, if the negative use case is either simpler or more interesting, deal with that inside the first if, leaving the more complex or negative cases to the else block.
+- Be careful with the ternary operator.  It should only be used to switch between simple expressions that don't require further computation. i.e. `time_str += (hour >= 12) ? "pm" : "am"` is fine, but `exponent >= 0 ? mantissa * (1 << exponent) : mantissa / (1 << -exponent)` is far more difficult to read.
+- Instead of minimizing the number of lines, a better metric is to minimize the time needed for someone to understand the code.
+- Avoid do/while loops.  They place the condition below the code that they're evaluating which is the opposite of for, if & while.  This often forces the reader to read the code twice.  All do/while loops can be re-written to use another for of loop.
+- It's perfectly fine to have multiple places in which to return early from a function.  This is most often seen with guard clauses near the top of the function.
+- Try to avoid the `goto` statement.  Some goto's, say a single goto at the bottom of a function that performs some clean-up can be fine, however, multiple goto targets and especially gotos that go upwards are problematic and lead to spaghetti code.
+- Minimize nesting of conditionals.  One way to achieve this is to handle failure cases and return early from the function.  If you have nesting inside of a loop, consider replacing the nesting with a `continue` statement.
+- Think about the "flow" of your program from a high-level.  Your code should ideally be easy to read and follow from top to bottom, like prose.  Try to minimize the areas of code that require conditionals or loops to avoid the reader from having to mentally "jump around" the code as they're reading it.
+
