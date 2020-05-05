@@ -75,7 +75,16 @@ ISBN-13   : 978-0596802295
 - Instead of minimizing the number of lines, a better metric is to minimize the time needed for someone to understand the code.
 - Avoid do/while loops.  They place the condition below the code that they're evaluating which is the opposite of for, if & while.  This often forces the reader to read the code twice.  All do/while loops can be re-written to use another for of loop.
 - It's perfectly fine to have multiple places in which to return early from a function.  This is most often seen with guard clauses near the top of the function.
-- Try to avoid the `goto` statement.  Some goto's, say a single goto at the bottom of a function that performs some clean-up can be fine, however, multiple goto targets and especially gotos that go upwards are problematic and lead to spaghetti code.
+- Try to avoid the `goto` statement.  Some goto's, say a single goto at the bottom of a function that performs some clean-up can be fine, however, multiple goto targets and especially goto's that go upwards are problematic and lead to spaghetti code.
 - Minimize nesting of conditionals.  One way to achieve this is to handle failure cases and return early from the function.  If you have nesting inside of a loop, consider replacing the nesting with a `continue` statement.
 - Think about the "flow" of your program from a high-level.  Your code should ideally be easy to read and follow from top to bottom, like prose.  Try to minimize the areas of code that require conditionals or loops to avoid the reader from having to mentally "jump around" the code as they're reading it.
+
+## Chapter 8 - Breaking Down Giant Expressions
+- BLarge chunks of code should be broken down into smaller, more digestible pieces.  Recent research indicates that most of us can only hold 3 or 4 "things" in our head at one time, so understanding large blocks of code is difficult.
+- Introduce an "explaining" variable.  This is a variable that holds a smaller sub-expression, is appropriately named and then used in the larger expression to give more meaning.  e.g. `var userName = line.split(':')[0].strip()` then `if userName == "admin"` rather than `if line.split(':')[0].strip() == "admin"`
+- Introduce "summary" variables to hold expressions that are reused.  e.g. instead of doing `if(request.user.id == document.user_id)` multiple times, introduce a variable `var userOwnsDocument = (request.user.id == document.user_id)` and use the variable inside the conditionals instead.
+- Use De Morgan's Laws to simplify boolean logic.  Instead of writing `if (!(file_exists && !is_protected))` we can simplify this to `if (!file_exists || is_protected)`
+- Don't abuse short-circuiting evaluation of boolean operators in order to perform "clever" logic.  Break the logic down into multiple lines and use explaining variables to make it easier to understand.
+- When implementing complicated logic, it's often the case that you'll need a creative approach in order to simplify the problem. e.g. Checking if time ranges overlap with each other can lead to multiple boolean comparisons, however, checking if time ranges _don't_ overlap is simpler and achieves the same goal by looking at the problem from an opposite/alternative perspective.
+- Using explaining or summary variables can help to simplify large blocks of code comprised of individual expressions.  Each expression may not be too complex, but when placed all together, the "block" of code can become difficult to read so use such variable to both reduce duplication and improve readability.
 
