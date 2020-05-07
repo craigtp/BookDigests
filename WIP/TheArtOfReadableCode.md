@@ -89,7 +89,7 @@ ISBN-13   : 978-0596802295
 - Using explaining or summary variables can help to simplify large blocks of code comprised of individual expressions.  Each expression may not be too complex, but when placed all together, the "block" of code can become difficult to read so use such variables to both reduce duplication and improve readability.
 
 ## Chapter 9 - Variables And Readability
-- Remove unnecessary variables.  If a variable holds a simply expression that is easily understood, use the expression directly instead of assigning to a variable. i.e. `var date = DateTime.Now` is redundant.
+- Remove unnecessary variables.  If a variable holds a simple expression that is easily understood, use the expression directly instead of assigning to a variable. i.e. `var date = DateTime.Now` is redundant.
 - Beware of using variables to hold an intermediate result, usually when searching some collection within a loop.  It's often better to handle whatever behaviour is required on the found element immediately rather than assigning to a temporary variable to be handled later, outside of the loop.
 - Beware of using "control flow" variables, which are used only to steer the flow of execution through the program and don't contain any real data (often used as a conditional check inside a `while` statement etc.)  Such variables can almost always be replaced with a better control flow structure.
 - Keep the scope of variables as small as possible.  Your variable should be "visible" to as few lines of code as possible.  This effectively reduces the number of variables a read has to think about at any one time.
