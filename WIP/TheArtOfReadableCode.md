@@ -88,3 +88,11 @@ ISBN-13   : 978-0596802295
 - When implementing complicated logic, it's often the case that you'll need a creative approach in order to simplify the problem. e.g. Checking if time ranges overlap with each other can lead to multiple boolean comparisons, however, checking if time ranges _don't_ overlap is simpler and achieves the same goal by looking at the problem from an opposite/alternative perspective.
 - Using explaining or summary variables can help to simplify large blocks of code comprised of individual expressions.  Each expression may not be too complex, but when placed all together, the "block" of code can become difficult to read so use such variables to both reduce duplication and improve readability.
 
+## Chapter 9 - Variables And Readability
+- Remove unnecessary variables.  If a variable holds a simply expression that is easily understood, use the expression directly instead of assigning to a variable. i.e. `var date = DateTime.Now` is redundant.
+- Beware of using variables to hold an intermediate result, usually when searching some collection within a loop.  It's often better to handle whatever behaviour is required on the found element immediately rather than assigning to a temporary variable to be handled later, outside of the loop.
+- Beware of using "control flow" variables, which are used only to steer the flow of execution through the program and don't contain any real data (often used as a conditional check inside a `while` statement etc.)  Such variables can almost always be replaced with a better control flow structure.
+- Keep the scope of variables as small as possible.  Your variable should be "visible" to as few lines of code as possible.  This effectively reduces the number of variables a read has to think about at any one time.
+- Don't declare all variables used in a function at the top of the function.  If a variable is not used until much further down in the code, declare the variable close to it's actual usage.
+- Prefer write-once variables.  The more places in which a variable's value can change, the harder it is to reason about its current value.
+
