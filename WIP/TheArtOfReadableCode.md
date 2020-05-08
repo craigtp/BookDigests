@@ -96,3 +96,11 @@ ISBN-13   : 978-0596802295
 - Don't declare all variables used in a function at the top of the function.  If a variable is not used until much further down in the code, declare the variable close to it's actual usage.
 - Prefer write-once variables.  The more places in which a variable's value can change, the harder it is to reason about its current value.
 
+## Chapter 10 - Extracting Unrelated Subproblems
+- Aggressively identify and extract unrelated subproblems in code.  Look at a function's high-level goal and examine each line of code.  Lines that do not work _directly_ to the goal should be extracted into separate functions.
+- Create lots of general purpose code.  General purpose code is great because it's completely decoupled from the rest of your project and domain.  Such code is easier to develop, easier to test and easier to understand.
+- Create functions that hide details of interfaces that are unintuitive. e.g. Deleting a cookie value for a website requires setting the expiry date to a date in the past.  We can wrap this functionality so that calling code simply needs to call a function named `delete_cookie`, which is more intuitive.
+- Create functions that wrap the "glue" code that often required within other functions.  e.g. Encrypting a string and returning an ASCII-armoured string result will require lots of conversions to and from byte arrays, this can be extracted to helper functions.
+- Whilst unrelated subproblem code should be aggressively extracted, it's possible to go too far.  Each new added function has a cost in readability so be sure to balance that when refactoring.
+- The key goal when refactoring unrelated subproblems is to separate the generic code from the project-specific code.
+
