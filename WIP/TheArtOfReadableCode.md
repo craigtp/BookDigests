@@ -80,7 +80,7 @@ ISBN-13   : 978-0596802295
 - Think about the "flow" of your program from a high-level.  Your code should ideally be easy to read and follow from top to bottom, like prose.  Try to minimize the areas of code that require conditionals or loops to avoid the reader from having to mentally "jump around" the code as they're reading it.
 
 ## Chapter 8 - Breaking Down Giant Expressions
-- BLarge chunks of code should be broken down into smaller, more digestible pieces.  Recent research indicates that most of us can only hold 3 or 4 "things" in our head at one time, so understanding large blocks of code is difficult.
+- Large chunks of code should be broken down into smaller, more digestible pieces.  Recent research indicates that most of us can only hold 3 or 4 "things" in our head at one time, so understanding large blocks of code is difficult.
 - Introduce an "explaining" variable.  This is a variable that holds a smaller sub-expression, is appropriately named and then used in the larger expression to give more meaning.  e.g. `var userName = line.split(':')[0].strip()` then `if userName == "admin"` rather than `if line.split(':')[0].strip() == "admin"`
 - Introduce "summary" variables to hold expressions that are reused.  e.g. instead of doing `if(request.user.id == document.user_id)` multiple times, introduce a variable `var userOwnsDocument = (request.user.id == document.user_id)` and use the variable inside the conditionals instead.
 - Use De Morgan's Laws to simplify boolean logic.  Instead of writing `if (!(file_exists && !is_protected))` we can simplify this to `if (!file_exists || is_protected)`
@@ -103,4 +103,22 @@ ISBN-13   : 978-0596802295
 - Create functions that wrap the "glue" code that often required within other functions.  e.g. Encrypting a string and returning an ASCII-armoured string result will require lots of conversions to and from byte arrays, this can be extracted to helper functions.
 - Whilst unrelated subproblem code should be aggressively extracted, it's possible to go too far.  Each new added function has a cost in readability so be sure to balance that when refactoring.
 - The key goal when refactoring unrelated subproblems is to separate the generic code from the project-specific code.
+
+## Chapter 11 - One Task At A Time
+- Code should be organised so that it's doing only one task at a time.  Breaking code into separate functions is good, but even within the same function, code should be logically grouped for each task.
+- Tasks can be small.  For example, code that reacts to a user clicking a button to up vote or down vote something is actually performing two tasks - one to interpret the button click and parse it into numerical values and one to update the overall score.
+- Try to identify all of the tasks that a piece of code is doing.  There's often multiple tasks at play - iterating a list, comparing values, computing results etc.  If each task isn't able to be easily extracted into its own function, try to group the tasks within the same function.  Using "summary variables" can help here.
+
+## Chapter 12 - Turning Thoughts Into Code
+- Your code should be written following the key words you'd use to describe its function to a colleague in plain English.  First, describe the code in plain English, look for the key words and phrases and write your code to match this description.
+- Using this technique, we can create code that is very readable. For example, if we have a function to determine if the user is authorised to access some resource based upon whether they're an admin or the resource owner, we would describe it in English as: "There are two way to be authorized, you are either an admin, or you are the document owner.  If none of these, you're not authorized".  The resulting code would be written to follow this, even if that results in `if` conditionals that may contain empty bodies.
+- The keywords and phrases used in the plain English description can often identify subproblems that can be extracted from the main logic.
+- If you can't describe the problem or your design in words, something is probably missing or undefined. Getting a program (or any idea) into words can really force it into shape.
+- This method of describing the program in plain English is often used when debugging code, where it's known as "rubber ducking".
+
+## Chapter 13 - Writing Less Code
+- The most readable code is no code at all.  Every line of code you write is a line of code that must be tested and maintained.  Reusing libraries or eliminating features can save time and keep a codebase lean.
+- Keep your codebase as small and lightweight as possible. The larger the codebase, the more complexity it contains.  Create as much generic "utility" code as possible to remove duplication, remove unused code and unused or useless features, keep the project compartmentalized into disconnected subprojects.
+- Rethink requirements to solve the easiest version of the problem that still gets the job done.
+- Make sure to re-familiarise yourself every so often with the modules, types and methods if your language's standard library. The goal isn't to memorize it, but to ensure you have a sense of what's available.  Leveraging code from the standard library means that's code you don't have to write yourself.
 
