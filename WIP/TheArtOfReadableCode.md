@@ -122,3 +122,15 @@ ISBN-13   : 978-0596802295
 - Rethink requirements to solve the easiest version of the problem that still gets the job done.
 - Make sure to re-familiarise yourself every so often with the modules, types and methods if your language's standard library. The goal isn't to memorize it, but to ensure you have a sense of what's available.  Leveraging code from the standard library means that's code you don't have to write yourself.
 
+## Chapter 14 - Testing And Readability
+- Test code should be just as readable as other code.  When test code is big and scary, coders are afraid to modify the real code and are afraid to add new test code.
+- Test code should be written to hide less important details from the reader and to highlight the more important details of the code being tested.
+- Using techniques to convert our test code intentions to plain English, we can often boil down most tests to a single line - _for this input/situation, expect this output/behaviour_.
+- When reducing test code to one or two function calls, ensure that assertion against the test outcome display sufficiently clear error messages.  Use a better Assertion library if required, or even write your own hand-crafted error messages.
+- When choosing input values for tests, try to choose the simplest set of values that completely exercise the code.
+- If using a large number of inputs to stress-test some code, it's better to construct those inputs programmatically instead of expressing them literally as this would result in difficult to read test code.
+- Use descriptive names for your test functions.  Don't be afraid of having long function names and ensure you capture the class, function and situation being tested and its expected output.
+- Practice test-friendly development.  You can perform test-driven development (TDD), but even without TDD, if you write your real code knowing that you'll be writing tests for it later, you start to design your code so that it's easier to test.
+- Of all the ways to break up a program into classes and methods, the most decoupled ones are usually the easiest to test.
+- Don't go too far with test code.  You shouldn't sacrifice readability of real code for the sake of tests. Don't strive for 100% test coverage as this results in diminishing returns and don't let testing get in the way of product development - don't let it dominate the entire project.
+
