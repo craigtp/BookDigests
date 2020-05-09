@@ -33,6 +33,7 @@ ISBN-13   : 978-0596802295
 - When dealing with names that represent either inclusive or exclusive ranges, prefer to use words such as `begin` and `end`.
 - When naming booleans, adding words such as `is`, `has`, `can` or `should` to the beginning of the name can make the name much clearer.  For example, a function named `SpaceLeft()` sounds like it might return a number, whereas `HasSpaceLeft()` sounds much more like a true/false value.
 - Avoid using negated terms in boolean values as these cause confusion.  For example, don't use `disable_ssl` but use something like `use_ssl`.
+- Be careful with naming things using words that are both nouns and verbs.  Words like `Count()`, `Record()` etc can used as both a noun and a verb and so methods named as such can be confusing to the reader as you exactly what the method does.
 - Always attempt to match your names to the expectations of users.  For example, many programmers understand a function prefixed with `get` to refer to a simple, non-compute intensive property accessor or similar, so make sure that you don't have a function prefixed with `get` that performs intensive computation.
 
 ## Chapter 4 - Aesthetics
@@ -133,4 +134,28 @@ ISBN-13   : 978-0596802295
 - Practice test-friendly development.  You can perform test-driven development (TDD), but even without TDD, if you write your real code knowing that you'll be writing tests for it later, you start to design your code so that it's easier to test.
 - Of all the ways to break up a program into classes and methods, the most decoupled ones are usually the easiest to test.
 - Don't go too far with test code.  You shouldn't sacrifice readability of real code for the sake of tests. Don't strive for 100% test coverage as this results in diminishing returns and don't let testing get in the way of product development - don't let it dominate the entire project.
+
+## Chapter 15 - Designing And Implementing A "Minute/Hour Counter"
+- We use this chapter to build a class using the techniques from the book.  The class is a "Minute & Hour Counter" and will keep track of the number of bytes transferred by a web server in the last minute and the last hour. 
+- The initial class interface for our MinuteHourCounter looks like this:
+```
+class MinuteHourCounter {
+    public:
+    // Add a count
+    void Count(int num_bytes);
+    // Return the count over this minute
+    int MinuteCount();
+    // Return the count over this hour
+    int HourCount();
+};
+```
+- The name of `Count()` could be better.  Count can be both a noun and a verb and it's not clear what the method actually does.  Alternatives could be `Increment()`, `Observe()`, `Record()` or `Add()`.  Record is a noun and verb like Count and the others are all a bit vague.
+- Our comments can be improved too.  This comment: `// Add a count  void Add(int count);` is now redundant and would be better is improved to add clarification. e.g. `// Add a new data point (count >= 0).  void Add(int count);`
+- Other comments are also unclear.  Consider this: `// Return the count over this minute  int MinuteCount();`.  This could be interpreted as the count over the current clock minute or the count over the last 60 seconds.  Use a better comment such as `// Return the accumulated count over the past 60 seconds.  int MinuteCount();`
+- Get an outside perspective on things.  Asking your colleagues and co-workers if a name or comment makes sense and is unambiguous is a great way to test if your code is "user-friendly".
+- The initial implementation is naive.  The `Add()` method adds byte counts, but is unbounded - throughout the lifetime of the class, the internal list will continue to grow causing memory pressures.  `MinuteCount()` and `HourCount()` are too slow as they have to examine the list with every invocation.  It would be better for performance to have these methods read directly from pre-computed values that are kept up to date by the `Add()` method.
+- One way to fix the problems is to implement a "conveyor belt" design.  We could have two lists, one for last minute and one for last hour which have items removed from them when they're older than the maximum time of the list.  This is inefficient, however, as we need two copies of each event.  A better implementation is a single list, with a two-stage design having the first stage the first minute and the second stage being the hour minus the first minute).  This is implemented by having two lists, and having a method that can "shift" items from one list to the other as time passes.  Minute counts come from the minute only list whilst hour counts count items from both lists.
+- This design works, but is very inflexible.  e.g. We're stuck with 1 minute and 1 hour timeslots and can't easily change them.   Also, depending upon how often the `Add()` method is called, this design can use an unbounded and unpredictable amount of memory.
+- The new design will improve upon this and a "time-bucketed" design.  This means we have a number of buckets, say one bucket for each minute in the past 60 minutes. All events that fall into the boundaries of a given buckets minute are grouped together.  When we need to count, we simply sum the totals from each bucket required.  Whilst this design can lose some precision, we gain a fixed, predictable memory usage.  We can always improve precision by having more buckets of smaller, more granular time periods.
+- This final design solved the previous problems by breaking things down into subproblems. Here are the three classes we created, in bottom-up order, and the subproblem each one solved: `ConveyorQueue`: A maximum-length queue that can be “shifted” and maintains its total sum.  `TrailingBucketCounter`: Moves the ConveyorQueue according to how much time has elapsed and maintains the count of a single (latest) time interval, with a given precision.  `MinuteHourCounter`: Simply contains two TrailingBucketCounters, one for the minute count and one for the hour count.
 
