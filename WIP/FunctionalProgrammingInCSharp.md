@@ -16,7 +16,7 @@ ISBN-13   : 978-1617293955
 - C# 6's `using static` statement allows importing the static members of a class meaning we can refer to those members without having to prefix them with the class name.  e.g. `using static System.Math;  public double Circumference => PI * 2 * Radius;`.
 - This is important as, in functional programming, we prefer functions whose behaviour relies solely upon their input values.  Instance methods typically interact with instance variables - an example of shared state.
 - C# now also has getter-only auto properties whose values can only be set from the constructor:
-    ```
+    ```csharp
     public class Circle
     {
         public Circle(double radius) => Radius = radius;
@@ -38,7 +38,7 @@ from its codomain.  The value that a function yields is determined exclusively b
 - Some HOFs don't _apply_ the given function, but return a new function instead.  e.g. If you had a function to divide two numbers: `Func<int, int, int> divide = (x, y) => x / y;` you might want to change the order of the arguments.  This can be achieved with an _adapter function_: `static Func<T2, T1, R> SwapArgs<T1, T2, R>(this Func<T1, T2, R> f) => (t2, t1) => f(t1, t2);`.  Now instead of calling `divide(10,2)` we can do: `var divideBy = divide.SwapArgs();  divideBy(2,10);`
 - You can create functions that exist only to create other functions.  You could create a general purpose function such as: `Func<int, bool> isMod(int n) => i => i % n == 0;` which would create the predicate required to filter a list by only modulo. e.g. `Range(1, 20).Where(isMod(2));` or `Range(1, 20).Where(isMod(3));`.
 - Another common use case for HOF s is to encapsulate setup and teardown operations.  For example, interacting with a database requires some setup to acquire and open a connection.  Instead of writing:
-    ```
+    ```csharp
     using (var conn = new SqlConnection(connString))
     {
         conn.Open();
@@ -46,7 +46,7 @@ from its codomain.  The value that a function yields is determined exclusively b
     }
     ```
     We could write:
-    ```
+    ```csharp
     public static R Connect<R>(string connString, Func<IDbConnection, R> f)
     {
         using (var conn = new SqlConnection(connString))
@@ -57,7 +57,7 @@ from its codomain.  The value that a function yields is determined exclusively b
     }
     ```
     And this above function could be called in the following manner: `Connect(connString, c => c.Execute("sp_create_log"));`.  What we're doing is effectively "abstracting away" the ceremony of the using statements setup and teardown logic.  We can create an even more generic function which is truly reusable for all need of the `using` statement:
-    ```
+    ```csharp
     public static R Using<TDisp, R>(TDisp disposable, Func<TDisp, R> f) where TDisp : IDisposable
     {
         using (disposable) return f(disposable);
@@ -88,7 +88,7 @@ from its codomain.  The value that a function yields is determined exclusively b
 - Unlike pure functions, whose application can be parallelized by default, impure functions don't parallelize out of the box. And because parallel execution is nondeterministic, you may get some cases in which your result is correct and others in which it isn't resulting in hard to trace bugs.
 - When all variables required within a method are provided as input (or are statically available), the method can be made static.  Although static classes/methods have previously been frowned upon as programs can become difficult to test and maintain due to excessive use, when a method is pure it can be made static with no problems and with no impact to testability.
 - To test impure functions, e.g. one that performs date validation using the current system date, we would use an "interface-based approach" in our object-oriented code:
-    ```
+    ```csharp
     public interface IDateTimeService
     {
         DateTime UtcNow { get; }
@@ -108,7 +108,7 @@ from its codomain.  The value that a function yields is determined exclusively b
     }
     ```
     Whilst this works, there is a lot of boilerplate code required and such an approach can lead to an explosion of interfaces inside the code base.  Also, despite having the date required for validation injected into our Validator class, we still can't prove that the function is pure as it depends on the implementation of the `IDateTimeService` that's injected.  Our test class would use a "fake" implementation that returns the same date every time, thus making it pure, but the "real" production code would likely use an impure implementation.  We can improve this to use a function signature rather than a complete interface:
-    ```
+    ```csharp
     public class DateNotPastValidator : IValidator<MakeTransfer>
     {
         private readonly Func<DateTime> clock;
@@ -120,7 +120,7 @@ from its codomain.  The value that a function yields is determined exclusively b
     }
     ```
     This is less code, but we still don't know if our function is pure as we don't know the implementation of the `clock` function that's injected.  We could improve this even further by injecting only a _value_ instead of injecting an entire interface:
-    ```
+    ```csharp
     public class DateNotPastValidator : IValidator<MakeTransfer>
     {
         private readonly DateTime today;
@@ -138,7 +138,7 @@ from its codomain.  The value that a function yields is determined exclusively b
 
 ## Chapter 3 - Designing Function Signatures And Types
 - There's a notation for function signatures that's standard within the functional programming community.  It's called arrow notation.  For example, a function that takes an `int` as an input and returns a `string` would be written as:
-    ```
+    ```csharp
     f: int => string
     ```
     In English, we'd read this as "f _has type_ of `int` to `string`".  The equivalent way to express this in C# would be as `Func<int,string>`.  No input or output would be expressed as opening and closing parentheses, i.e. `()`.  This is the same as `void`.
@@ -152,16 +152,16 @@ from its codomain.  The value that a function yields is determined exclusively b
     | `(int, int) => int`  | `Func<int,int,int>` | `(int a, int b) => a + b;`     |
 - For the last example above that has multiple inputs, parentheses here are used to indicate tuples, that is, we're notating a binary function (a function taking two inputs) as a unary function (a function taking a single input) whose input argument is a binary tuple.
 - When we see a function like this:
-    ```
+    ```csharp
     public static R Connect<R>(string connStr, Func<IDbConnection, R> func)
         => Using(new SqlConnection(connStr), conn => { conn.Open(); return func(conn); });
     ```
     It's signature can be defined as:
-    ```
+    ```csharp
     Func<string, Func<IDbConnection, R>, R>
     ```
     That is, a function that takes a string and another function as input parameters and returns an `R`.  The second input parameter is a function that itself takes an `IDbConnection` as an input parameter and returns an `R`.  The equivalent arrow notation, which is slightly simpler is:
-    ```
+    ```csharp
     (string, (IdbConnection => R)) => R
     ```
 - Some function signatures are very expressive, some less so.  A function signature of `() => ()` tells us almost nothing as to what the function actually does, but a function signature of `(IEnumerable<T>, (T => bool)) => IEnumerable<T>` tells us quite clearly that the function is using a _predicate_ (the `(T => bool)` part) to filter the `IEnumerable<T>` input to return a new `IEnumerable<T>`.  Having signatures that are very expressive is a good trait as it allows us to be clear in our intent and almost allows the reader to make a very good guess at the actual function implementation.
@@ -172,7 +172,7 @@ from its codomain.  The value that a function yields is determined exclusively b
 - Custom types are heavily used in functional programming as they're one of the core tenets of _making invalid state unrepresentable_.
 - A function is honest if its behaviour can be predicted by its signature: it returns a value of the declared type; no throwing exceptions, and no null return values.
 - The absence of data is often modelled with `void`, however, `void` doesn't work well with functional techniques such as chaining functions and wrapping code as a `Func` inside a method, such as the following that will log the execution time of any `Func`:
-    ```
+    ```csharp
     public static class Instrumentation
     {
         public static T Time<T>(string op, Func<T> f)
@@ -190,12 +190,12 @@ from its codomain.  The value that a function yields is determined exclusively b
 - Use void to indicate the absence of data, meaning that your function is only called for side effects and returns no information. Use Unit as an alternative, more flexible representation when there's a need for consistency in the handling of `Func` and `Action`.
 - We can use the `Option` type to make working with data, or the possible absence of it, much easier.  An `Option` is a container that wraps a value or no value - like a box that may contain something, or it may contain nothing. The symbolic definition for `Option` is: `Option<T> = None | Some(T)`.  `Option` is also called a `Maybe` type in some languages.  An `Option` is an example of a _discriminated union_, a type can can be one of a number of different things.
 - Using `Option` means that you can create it and assign either no value or a value. e.g.
-    ```
+    ```csharp
     Option<string> _ = None;
     Option<string> john = Some("John");
     ```
     Code that might need to interact with an `Option`, say as a return type from a function call, is forced to handle both the `Some` and `None` cases by the compiler.  This handling is done using pattern matching. e.g.
-    ```
+    ```csharp
     string greet(Option<string> greetee)
     => greetee.Match(
         None: () => "Sorry, who?",
@@ -207,7 +207,7 @@ from its codomain.  The value that a function yields is determined exclusively b
     Using an `Option` with a `None` value is an alternative for `null`, but an alternative in which callers are "forced" to handle the possibility of there being no actual value returned.  This helps to prevent some of the most common bugs, such as the `NullReferenceException`.
 - There are two classes of functions, _total_ functions and _partial_ functions.  Total functions are mappings that are defined for every element of the domain.  Partial functions are mappings that are defined for some, but not all, elements of the domain.  Partial functions are problematic as it's not clear what the function should do when given an input for which it cannot compute a result.  The `Option` type offers a perfect solution to model such cases.  One such example is the use of `Option` as a return from a function that tries to convert a `string` to an `int`.  It's partial as not all `string`s can be converted to `int`s, but `Option` allows us to provide a return value from such a function can covers all possible outcomes (i.e. a `Some` in the case the `string` is converted to an `int` and a `None` if not).
 - Use "smart constructors" to create objects.  These are similar to factory methods, and implement the necessary logic to ensure the correct type of object is created.  For example, the `Age` class mentioned above could use `Option` within a constructor such as:
-    ```
+    ```csharp
     public static Option<Age> Of(int age) => IsValid(age) ? Some(new Age(age)) : None;
     ```
     This ensures all possible `int` values passed as input return an `Option<Age>`.  Valid ages are encoded as a `Some<Age>` whilst invalid ones are encoded as `None`.  Callers will be given a valid return value, i.e. no chance for a null reference exception, but will be forced to handle both the `Some` and `None` cases.
