@@ -14,3 +14,4 @@ Improvements via suggestions and/or pull requests are welcome, especially in the
 [Software Requirements, 3rd Edition](BookDigests/SoftwareRequirements.md)  
 [Domain-Driven Design: Tackling Complexity In The Heart Of Software](BookDigests/DomainDrivenDesign.md)  
 [The Art Of Readable Code](BookDigests/TheArtOfReadableCode.md)  
+[Functional Programming In C#](BookDigests/FunctionalProgrammingInCSharp.md)  
