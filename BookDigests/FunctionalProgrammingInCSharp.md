@@ -24,8 +24,7 @@ ISBN-13   : 978-1617293955
     }
     ```
     These facilitate the definition of immutable types.
--  In mathematics, a function is a map between two "sets", respectively called the domain and codomain.  That is, given an element from its domain, a function yields an element
-from its codomain.  The value that a function yields is determined exclusively by its input.
+-  In mathematics, a function is a map between two "sets", respectively called the domain and codomain.  That is, given an element from its domain, a function yields an element from its codomain.  The value that a function yields is determined exclusively by its input.
 - In programming, these "sets" are represented by types.  If the domain was all the lower case letters of the alphabet and the codomain was the upper-case letters, we could use `char` to represent both the domain and the codomain.  The type of function that translates between them would them be written like: `char => char`.  That is, given a `char`, the function will yield a `char`.
 - There are several language features in C# that allow us to represent functions: `Methods`, `Delegates`, `Lambda Expressions`, `Dictionaries`.  Dictionary are usually thought of as data, but they can represent functions where each input value (the dictionary "key") has a resulting output value (the dictionary "value").
 - C# delegate used to be expressed with the `delegate` keyword, e.g. `public delegate Greeting Greeter(Person p);` however, now C# contains built-in `Func` and `Action` types to represent delegates (e.g. `Func<Person, Greeting>`) so the previous way of declaring delegates is rarely used.
