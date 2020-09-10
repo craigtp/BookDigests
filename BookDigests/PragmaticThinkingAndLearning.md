@@ -1,5 +1,5 @@
 
-# Book Digest: Dependency Injection In .NET
+# Book Digest: Pragmatic Thinking and Learning: Refactor Your Wetware
 
 Title     : Pragmatic Thinking and Learning: Refactor Your Wetware  
 Author(s) : Andy Hunt  
