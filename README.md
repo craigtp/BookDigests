@@ -15,3 +15,4 @@ Improvements via suggestions and/or pull requests are welcome, especially in the
 [Domain-Driven Design: Tackling Complexity In The Heart Of Software](BookDigests/DomainDrivenDesign.md)  
 [The Art Of Readable Code](BookDigests/TheArtOfReadableCode.md)  
 [Functional Programming In C#](BookDigests/FunctionalProgrammingInCSharp.md)  
+[Pragmatic Thinking And Learning](BookDigests/PragmaticThinkingAndLearning.md)  
