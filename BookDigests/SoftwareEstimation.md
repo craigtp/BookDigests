@@ -19,18 +19,18 @@ ISBN-13   : 978-0735605350
 ## Chapter 2 - How good an estimator are you?
 * Don't provide "percentage confident" estimates (especially "90% confident") unless you have a quantitatively derived basis for doing so.
 * Avoid using artificially narrow ranges. Be sure the ranges you use in your estimates don't misrepresent your confidence in your estimates.
-* It’s common to feel the necessity to keep your estimates more narrow than wide.  If you’re pressured to narrow your estimates, verify that the pressure is coming from an external source and not yourself!
+* It's common to feel the necessity to keep your estimates more narrow than wide.  If you're pressured to narrow your estimates, verify that the pressure is coming from an external source and not yourself!
 
 ## Chapter 3 - Value of accurate estimates
 * Underestimating can lead to many negative consequences such as: More Status meetings, Frequent re-estimation, Preparing interim releases, fixing bugs from quick-n-dirty implementations etc. Each of these activities do not need to occur at all when a project is meeting its goals, and they drain time from  productive work on the project thus making it take longer than it would if it were estimated and planned accurately.
-* Overestimating can lead to Parkinson’s Law (work expands to fill the time allocated to it) or "Student’s Syndrome" (procrastination and leaving things to the last minute).  This is frequently the reason for managers to "squeeze" estimates if they think they’re overestimated.
-* Don't intentionally underestimate. The penalty for underestimation is more severe than the penalty for overestimation (parkinson’s law/"student syndrome"). Address concerns about overestimation through planning and control, not by biasing your estimates.
+* Overestimating can lead to Parkinson's Law (work expands to fill the time allocated to it) or "Student's Syndrome" (procrastination and leaving things to the last minute).  This is frequently the reason for managers to "squeeze" estimates if they think they're overestimated.
+* Don't intentionally underestimate. The penalty for underestimation is more severe than the penalty for overestimation (parkinson's law/"student syndrome"). Address concerns about overestimation through planning and control, not by biasing your estimates.
 * When asked "We need this software in 4 months" and you believe it will take at least 6 months.  Recognize a mismatch between a project's business target and a project's estimate for what it is: valuable risk information that the project might not be successful. Take corrective action early, when it can do some good such as reducing the scope of the deliverables, increasing team size etc.        
 * Many businesses value predictability more than development time, cost, or flexibility. That is, they would rather have a longer estimate with lower variability than a shorter estimate with higher variability (i.e. can deliver between 6 and 12 months vs between 9 and 10 months).  Be sure you understand what your business values the most.
 
 ## Chapter 4 - Where does estimation error come from?
 * It isn't possible to estimate the amount of work required to build something when that "something" has not been defined.
-* At the beginning of the project, less information about how the project will run over time and long it will take is available upon which to make our estimates and decisions.  This means there’s a high level of uncertainty at this stage of the project.  As time passes, more data/information naturally becomes available, uncertainty is reduced  and estimates and decisions can become more accurate.  This narrowing over time of the uncertainty level is known as the "Cone of Uncertainty".
+* At the beginning of the project, less information about how the project will run over time and long it will take is available upon which to make our estimates and decisions.  This means there's a high level of uncertainty at this stage of the project.  As time passes, more data/information naturally becomes available, uncertainty is reduced  and estimates and decisions can become more accurate.  This narrowing over time of the uncertainty level is known as the "Cone of Uncertainty".
 * Consider the effect of the Cone of Uncertainty on the accuracy of your estimate. Your estimate cannot have more accuracy than is possible at your project's current position within the Cone.
 * Don't assume that the Cone of Uncertainty will narrow itself. You must force the Cone to narrow by removing sources of variability from your project.
 * Account for the Cone of Uncertainty by using predefined uncertainty ranges in your estimates and by having one person create the "how much" part of the estimate and a different person create the "how uncertain" part of the estimate.
@@ -45,7 +45,7 @@ ISBN-13   : 978-0735605350
 
 ## Chapter 5 - Estimate Influences
 * The largest driver in a software estimate is the size of the software being built, because there is more variation in the size than in any other factor.
-* Organisations routinely mis-estimate software projects due to size because they often don’t know how big the software will be in advance or they don’t adjust estimates when the software is consciously increased in size (ie.. change requests)
+* Organisations routinely mis-estimate software projects due to size because they often don't know how big the software will be in advance or they don't adjust estimates when the software is consciously increased in size (ie.. change requests)
 * Projects have an exponential increase in effort as a project size increases due to the exponential increase in communication paths as team members increase. This is known as a diseconomy of scale.
 * Normally we talk about economies of scale (individual unit cost falls when larger amounts are produced), but software projects exhibit diseconomies of scale, which is the exact opposite.
 * There isn't a simple technique in the art of estimation that will account for a significant difference in the size of two projects. If you're estimating a project of a significantly different size than your organization has done before, you'll need to use estimation software that applies the science of estimation to compute the estimate for the new project based on the results of past projects.
@@ -60,7 +60,7 @@ ISBN-13   : 978-0735605350
 * Estimates can be "top-down" or "bottom-up".  Top-down estimates compare the entire project to a similar past project, looking for points of correlation between the two projects in order to estimate at a high-level.  Bottom-up estimates breakdown the project into granular small tasks, estimate each of those and add them all up to arrive at a project estimate.
 
 ## Chapter 7 - Count, Compute, Judge
-* Count if at all possible (count the units you’re using for size estimation - lines of code, user stories etc.). Compute when you can't count. Use judgment alone only as a last resort.
+* Count if at all possible (count the units you're using for size estimation - lines of code, user stories etc.). Compute when you can't count. Use judgment alone only as a last resort.
 * Find something to count that's highly correlated with the size of the software you're estimating within your specific environment, and is available sooner rather than later in the project.
 * Collect historical data that allows you to compute an estimate from a count.
 * Don't discount the power of simple, coarse estimation models such as average effort per defect, average effort per Web page, average effort per story, and average effort per use case.
@@ -101,7 +101,7 @@ ISBN-13   : 978-0735605350
 * Due to fuzzy logic's aggregate nature, it works best when estimating at least 20 features together.
 * Consider using standard components (breaking projects into numbers of components such as dynamic web pages, static web pages, database tables, reports, business rules etc.) as a low-effort technique to estimate size in a project's early stages. This technique also only works with 20 features or more.
 * Standard components technically breaks the "count, compute, judge" rule so only use as a last resort.
-* Story points are an arbitrary value (usually powers of 2 or fibonacci sequence) which don’t correlate to anything concrete like lines of code but can be used to estimate an iterative project's effort and schedule that is based on data from the same project.
+* Story points are an arbitrary value (usually powers of 2 or fibonacci sequence) which don't correlate to anything concrete like lines of code but can be used to estimate an iterative project's effort and schedule that is based on data from the same project.
 * Exercise caution when calculating estimates that use numeric ratings scales. Be sure that the numeric categories in the scale actually work like numbers, not like verbal categories such as small, medium, and large.
 * Use t-shirt sizing to quickly help nontechnical stakeholders rule features in or out while the project is in the wide part of the Cone of Uncertainty.  T-Shirt sizes (Small, Medium, Large) are assigned as "business value" by the business and as "development effort" by developers.  This matrix can be used to determine whether a feature is worth implementing (i.e. a feature with small business value and large development effort may not be worth implementing).
 * Use proxy-based techniques to estimate test cases, defects, pages of user documentation, and other quantities that are difficult to estimate directly.
@@ -114,7 +114,7 @@ ISBN-13   : 978-0735605350
 ## Chapter 14 - Software estimation tools
 * Software tools can help with estimation efforts, especially computationally intensive estimation methods that you can't easily do by hand, even with a good calculator.
 * Beware of an "objective authority" changing estimates. The stakeholder sometimes proposes a few minor feature cuts (or a slight increase in team size) and then expects disproportionate reductions in the project's cost and schedule.
-* Using Estimation software (especially when results are visualised on a graph etc) can serve as an impartial third party in arbitrating the effects of such changes. You can let the tool play the "bad cop" that tells the stakeholder his changes don't reduce schedule or costs as much as he’d hoped.
+* Using Estimation software (especially when results are visualised on a graph etc) can serve as an impartial third party in arbitrating the effects of such changes. You can let the tool play the "bad cop" that tells the stakeholder his changes don't reduce schedule or costs as much as he'd hoped.
 * Use an estimation software tool to sanity-check estimates created by manual methods. Larger projects should rely more heavily on commercial estimation software.
 * You will need to calibrate software tools with data from at least 3 projects using any of effort (man months), schedule (calendar months), or size (lines of code).
 * Don't treat the output of a software estimation tool as divine revelation. Sanity check estimation tool outputs just as you would other estimates.
@@ -135,7 +135,7 @@ ISBN-13   : 978-0735605350
 * Present your estimates to project stakeholders in a way that allows you to tighten up your estimates as you move further into the project (I.e. always use ranges rather than a single point).
 
 ## Chapter 17 - Standardized estimation procedures
-* Develop a standardized estimation procedure at the organisational level and use it for all projects to ensure consistency, repeatability and protection from pressures to change an estimate simply because a powerful stakeholder doesn’t like the result.
+* Develop a standardized estimation procedure at the organisational level and use it for all projects to ensure consistency, repeatability and protection from pressures to change an estimate simply because a powerful stakeholder doesn't like the result.
 * Standardized procedures will:  emphasise counting and computing over judgement, use multiple estimation approaches, defines how the estimation approach changes over the course of a project and contains a clear description of any inaccuracies.
 * Coordinate your Standardized Estimation Procedure with your SDLC.
 * Always perform introspection on your estimates and the procedures that produced them. Check for accuracy, wide enough ranges, high or low bias and which techniques produced the best estimates over time.
@@ -191,7 +191,7 @@ ISBN-13   : 978-0735605350
 * Defect-removal practices that include requirements prototyping, formal design inspections, personal desk-checking of code, unit testing, integration testing, system testing, and high-volume beta testing is estimated to remove about 95% of defects prior to the software's release.
 * If you want to move from 95% reliability to 99% reliability, you should plan to add 25% to the "main build" part of your schedule. You should plan to add another 25% to your schedule to improve from 99% to 99.9% reliability
 * Use your project's total Risk Exposure (RE) as the starting point for buffer planning.
-* It’s important to add additional time for non-development tasks when converting from estimated time to real/planned time.  Add:  5-10% for admin, 2-4% for IT Support/Infrastructure and allow a 1-4% increase in requirements per month.  For first-time development in a new/unfamiliar environment allow 20-40% increase in effort.
+* It's important to add additional time for non-development tasks when converting from estimated time to real/planned time.  Add:  5-10% for admin, 2-4% for IT Support/Infrastructure and allow a 1-4% increase in requirements per month.  For first-time development in a new/unfamiliar environment allow 20-40% increase in effort.
 
 ## Chapter 22 - Estimate presentation styles
 * An essential practice in presenting an estimate is to document the assumptions embodied in the estimate, primarily: Which features are required, Availability of key resources, Dependencies on 3rd parties, Major assumptions and Major unknowns.
@@ -199,7 +199,7 @@ ISBN-13   : 978-0735605350
 * Use plus/minus qualifiers for the various numbers in your estimate and consider how large the qualifiers are.  A typical practice is to make the qualifiers large enough to include one standard deviation on each side.
 * Typically the minus qualifier will be smaller than the plus qualifier.
 * Be wary that, as an estimate gets passed around an organisation, the plus/minus qualifiers may tend to get stripped down or removed entirely.
-* Risk Quantification is a method that can be used on top of plus/minus qualifiers and involves communication of the estimate’s specific assumptions with separate plus/minus qualifiers for each assumption.
+* Risk Quantification is a method that can be used on top of plus/minus qualifiers and involves communication of the estimate's specific assumptions with separate plus/minus qualifiers for each assumption.
 * Be sure you understand whether you're presenting uncertainty in an estimate or uncertainty that affects your ability to meet a commitment.
 * Don't present project outcomes to other project stakeholders that are only remotely possible.
 * Consider graphic presentation of your estimate as an alternative to text presentation.
@@ -215,8 +215,8 @@ ISBN-13   : 978-0735605350
 * We don't negotiate questions of fact, we look them up. Similarly, a software estimate is the result of an analytical activity, and it isn't rational to negotiate the estimate. It is rational to negotiate the commitment that is related to the estimate.
 * If you want to ensure the success of your software projects, educate your nontechnical project stakeholders about the costs associated with arbitrarily cutting cost and schedule estimates without making corresponding cuts in the work that needs to be done.  Educate them about the Cone of Uncertainty, and about the differences between estimates, targets, and commitments.
 * Treat estimation discussions as problem solving, not negotiation. Recognize that all project stakeholders are on the same side of the table. Everyone wins, or everyone loses.
-* It’s better to perform problem solving rather than negotiation around estimates.  The negotiation method should consist of:  Separate the people from the problem, Focus on interests not positions, Invent options for mutual gain, Insist on using objective criteria.
-* Always focus on interests not positions.  When one side states a position (i.e. "We need the software in 6 months") try to find why and for what purpose.  If you can’t deliver in the timescale demanded, find out why the timescale exists and look for a creative win-win solution that solves the underlying problem/interest that causes the other side to demand the software in 6 months.
+* It's better to perform problem solving rather than negotiation around estimates.  The negotiation method should consist of:  Separate the people from the problem, Focus on interests not positions, Invent options for mutual gain, Insist on using objective criteria.
+* Always focus on interests not positions.  When one side states a position (i.e. "We need the software in 6 months") try to find why and for what purpose.  If you can't deliver in the timescale demanded, find out why the timescale exists and look for a creative win-win solution that solves the underlying problem/interest that causes the other side to demand the software in 6 months.
 * Generate as many planning options as you can to support your organization's goals and help with the "negotiation".  Avoid saying, "No, I can't do that"; instead, redirect the discussion toward what you can do.
 * As you foster an atmosphere of collaborative problem solving, don't make any commitments based on off-the-cuff estimates.
 * Insist on Using Objective Criteria.  Questioning an estimate is a valid and useful practice. Throwing it out the window and replacing it with wishful thinking is not.
