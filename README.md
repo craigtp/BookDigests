@@ -16,3 +16,4 @@ Improvements via suggestions and/or pull requests are welcome, especially in the
 [The Art Of Readable Code](BookDigests/TheArtOfReadableCode.md)  
 [Functional Programming In C#](BookDigests/FunctionalProgrammingInCSharp.md)  
 [Pragmatic Thinking And Learning](BookDigests/PragmaticThinkingAndLearning.md)  
+[Designing Data-Intensive Applications](BookDigests/DesigningDataIntensiveApplications.md)  
