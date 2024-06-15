@@ -6,7 +6,114 @@ ISBN-10   : 0137464401
 ISBN-13   : 978-0137464401
 
 ## Chapter 1 - Art Or Science?
-// TODO
+- Software Development is much more art than it is science.
+- Although we often hear the term "Software Engineering", software bears very little resemblance to actual engineering practice in other fields.
+- Despite software lacking true engineering rigour, there are many practices that can be adopted to make software development more like engineering.
+
+## Chapter 2 - Checklists
+- A fundamental problem with Software Development is that there's always a lot going on and our brains aren't great at keeping everything in memory.
+- To ensure that important items don't get forgotten, use checklists, especially at the beginning of a project.
+- A good checklist for a new project might be:
+  - Use Git version control
+  - Automate the build
+  - Turn on all error messages (treat warnings as errors)
+- It's rare that we can start entirely new projects, but checklists like the above can also be used with existing codebases as part of a gradual improvement process.
+
+## Chapter 3 - Tackling Complexity
+- It's said that humans have a limited capacity of holding current information in memory - the number of items is said to be 7.
+- Software Development must provide value to the organisation that creates it, but that development must also be sustainable over time.
+- Optimize your code for reading, not writing.  Code is read far more often than it's written.
+  - Code should be readable, ideally like prose.
+  - Helps to ensure that new programmers to the codebase, or even a future you, can understand the code's intention.
+- Code isn't an asset, it's a liability.  The faster you type, the more code you create that has to be maintained.
+- It's only by applying good architecture and engineering disciplines that the sustainability of software development can be maintained.
+
+## Chapter 4 - Vertical Slice
+- Software usually has many horizontal layers.  These start at the user-interface, then go all the way through to the data store.
+- Vertical slices are implementations of some small piece of functionality of the software that is implemented within every horizontal layer.
+- Start new projects with a walking skeleton, which is the minimal amount of code that encompasses every horizontal layer of the code.
+- You should always find a motivation for making changes to code.  Such motivation acts as a _driver_ of the change.
+  - Drivers gave rise to many types of x-driven software techniques such as Test-Driven Development, Behaviour-Driven Development, Domain-Driven Design etc.
+- Thin vertical slices are an effective way to demonstrate that the feature actually works.  When combined with Continuous Delivery, you can very quickly get working software into production.
+
+## Chapter 5 - Encapsulation
+- Encapsulation is an important part of making code readable and understandable.
+- Encapsulation is not primarily about hiding an object's private data and only exposing it through property getters, it's primarily about ensuring that the object "protects its invariants".  This means that the object is always in a valid state.
+- The essential quality of an object is its contract. It's usually simpler than the underlying implementation, so it fits better in your brain.
+- Postel's law states, "Be conservative in what you send, be liberal in what you accept".
+  - This can be interpreted as allowing input as long as you can meaningfully work with it, but no longer.
+  - A corollary is that while you should be liberal in what you accept, there’s still going to be input you can't accept. As soon as you detect that that's the case, fail fast and reject the input.
+- You can use the [Transformation Priority Premise](https://blog.cleancoder.com/uncle-bob/2013/05/27/TheTransformationPriorityPremise.html), which provides a set of heuristics of how to make refactorings to existing code, as a driver for code change.
+- The interaction between an object and a caller should obey a contract.  This is a set of pre- and postconditions.
+  - The preconditions describe the responsibilities of the caller. If the calling code fulfils those obligations, however, the postconditions describe the guarantees given by the object.
+- Use the Red-Green-Refactor cycle of Test-Driven Development to help guide the specific changes to your code.
+  - It's one of the most scientific methodologies of software engineering as you first form a hypothesis (a failing test), then perform an experiment and compare the outcomes (making the test pass and refactoring code if necessary).
+  
+## Chapter 6 - Triangulation
+- Short-term memory has a much smaller capacity than long-term memory.
+- When working with legacy code, you have to slowly and painstakingly commit the code and its structure to long-term memory however, there's two problems in doing this:
+  - It takes a long time to learn the codebase.
+  - Change is difficult.  This is because changes to the structure of the code are hard to change from the previously committed structure within your long-term memory.
+- Use tests to cover the desired behaviours of your codebase.
+- Use the "Devil's Advocate" technique to help answer the question of knowing if you have sufficient test cases.  This involves deliberately trying to make tests pass by using a known-incomplete implementation.  If a test passes that should really fail, you're missing a test case.
+- Don't forget about the Red-Green-Refactor cycle of test-driven development. As you make additional test cases pass, remember to refactor the implementation code to be more readable and understandable.
+- When you test-drive a codebase, the tests play the role of measurements.  When you add a failing test, you're measuring something that doesn't yet exist.
+- The more tests you add, the better, and more precisely, you describe the system under test, just as more measurements in (for example) a geographic survey produces a more accurate and precise result.
+- Always write numeric expressions in "number-line order". For example, if you need to check if some variable is between a defined minimum and maximum value, write the comparison like so:  `min <= [variable] <= max`.  This help readability as the min and max are in their most natural positions - minimum on the left and maximum on the right.
+- To determine when you have enough tests, you should consider the likelihood of a regression in the code under test.  For example, if the code is a method clearly named to compute a sum of some values, and you've used the `.Sum` LINQ method within the code, it's unlikely that a programmer will change that to something else.
+
+## Chapter 7 - Decomposition
+- No one sets out to write legacy code, but code bases will naturally and gradually deteriorate.
+  - Code bases gradually become more and more complicated through a series of small changes and when programmer's aren't paying sufficient attention to the overall quality.
+- Institute a rule or metric on your team to examine some aspect of code quality.  Ensure that any code changes that violate the metric are rejected.
+  - One good starting metric is cyclomatic complexity of each method.  Pick a value, for example, 7 - to align with the number of things you can keep in your head at once - and enforce code to not violate that rule.
+  - Cyclomatic Complexity is one of very few code metrics that have universal usefulness.  It's a measure of the number of pathways through a piece of code.
+- Keep methods short.  
+  - Follow the 80/24 rule.  This rule is named after the approximate number of characters (80) and lines of text (24) that can fit on a single screen (using old fashioned VDU sizes) without any scrolling. This rule is not a hard and fast one and is more of a guide.
+  - In line with the rule regarding keeping only 7 things in your brain at once, ensure methods have no more than 7 things going on within them.
+- As you add methods to classes, ensure that there is _cohesion_ between the methods.  Cohesion means that things that change together should be kept together and, conversely, things that change at different rates belong apart.
+- Use careful abstractions when designing classes and methods.  Abstraction can be thought of as the "elimination of the irrelevant and the amplification of the essential".
+- When refactoring code, beware of "feature envy".  This is a code smell where some code exists in one place, but the code accesses methods or objects elsewhere more than it accesses methods in it's own class.  Refactor to move the method to the object that the method seems "envious" of.
+- Beware of code that can lose information.  A simple `IsValid` property or method might return a boolean flag to indicate validity (or not) however, downstream code often needs to know _why_ something may not be valid.  It may be better to return an object that contains both the validation result as well as reasons for validation failure (if applicable).
+- Avoid methods that return an object, in the case of success, but null, in the case of failure. (i.e. a `Validate()` method might do this).
+  - Use the `Option<T>` (aka `Maybe<T>`) monad to "wrap" the return object forcing callers to the method to explicitly handle both cases.  The success case where the object `T` is returned and the failure case where it is not.
+- You should aim for an architecture of your code base so that regardless of where you look, the code fits in your head. At a high level, there's 7 or fewer things going on. In the low-level code, there's at most 7 things you have to keep track of. At the intermediary level, this should continue to hold.
+
+## Chapter 8 - API Design
+- An API is a contract with the outside world.  The interface of your API offer the consumer _affordance_.  Affordance is the set of methods, values, functions, and objects exposed via the API.
+  - The affordance should be a good abstraction over the features and functionality that your API provides.  It's an API that is intuitive and easy to use.  The API should also provide sufficient encapsulation to ensure that object invariants are protected.
+- Good API Design follows some key principles
+
+
+
+
+
+
+
+
+
+
+## Chapter 9 - Teamwork
+
+## Chapter 10 - Augmenting Code
+
+## Chapter 11 - Editing Unit Tests
+
+## Chapter 12 - Troubleshooting
+
+## Chapter 13 - Separation Of Concerns
+
+## Chapter 14 - Rhythm
+
+## Chapter 15 - The Usual Suspects
+
+## Chapter 16 - Tour
+
+
+
+
+
+
 
 ## Appendix A - List Of Practices
 
