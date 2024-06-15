@@ -17,3 +17,4 @@ Improvements via suggestions and/or pull requests are welcome, especially in the
 [Functional Programming In C#](BookDigests/FunctionalProgrammingInCSharp.md)  
 [Pragmatic Thinking And Learning](BookDigests/PragmaticThinkingAndLearning.md)  
 [Designing Data-Intensive Applications](BookDigests/DesigningDataIntensiveApplications.md)  
+[Code That Fits In Your Head](BookDigests/CodeThatFitsInYourHead.md)  
